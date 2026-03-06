@@ -1,13 +1,18 @@
+
+![stvg_promo2](https://github.com/user-attachments/assets/076c6ffe-eb67-45cd-b60e-151be9421587)
+
 # Script to Voice Generator
 
-Welcome author!
+Welcome to any script writing author out there!
 
-Convert formatted script files into fully voiced audio using Microsoft Edge-TTS,
+You can convert formatted script files into fully voiced audio using Microsoft Edge-TTS,
 with per-character voice settings, audio effects, and smart merged output.
 
 **Made by Reactorcore** — https://linktr.ee/reactorcore
 
 ---
+
+<img width="1920" height="1020" alt="stvg screenshot (1)" src="https://github.com/user-attachments/assets/e84cb288-0bf0-41c7-8337-0d765860288f" />
 
 ## What You Need
 
