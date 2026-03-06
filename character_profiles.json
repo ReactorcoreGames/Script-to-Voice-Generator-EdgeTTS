@@ -1,0 +1,383 @@
+{
+  "schema_version": 1,
+  "last_updated": "2026-03-05T22:00:50",
+  "profiles": {
+    "Mike": {
+      "display_name": "Mike",
+      "last_seen": "2026-02-18T20:43:53",
+      "edge_tts": {
+        "voice": "en-US-EricNeural",
+        "pitch_hz": 0,
+        "speed_percent": 0,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "off",
+        "robot_voice": "off",
+        "cheap_mic": "mild",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    },
+    "Sarah": {
+      "display_name": "Sarah",
+      "last_seen": "2026-02-18T20:43:53",
+      "edge_tts": {
+        "voice": "en-US-MichelleNeural",
+        "pitch_hz": 0,
+        "speed_percent": 0,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "off",
+        "robot_voice": "off",
+        "cheap_mic": "mild",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    },
+    "Narrator": {
+      "display_name": "Narrator",
+      "last_seen": "2026-03-05T22:00:50",
+      "edge_tts": {
+        "voice": "en-GB-RyanNeural",
+        "pitch_hz": -50,
+        "speed_percent": 0,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "off",
+        "robot_voice": "off",
+        "cheap_mic": "mild",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    },
+    "Alex": {
+      "display_name": "Alex",
+      "last_seen": "2026-03-05T22:00:50",
+      "edge_tts": {
+        "voice": "en-GB-SoniaNeural",
+        "pitch_hz": 0,
+        "speed_percent": 0,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "off",
+        "robot_voice": "off",
+        "cheap_mic": "mild",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    },
+    "Jordan": {
+      "display_name": "Jordan",
+      "last_seen": "2026-03-05T22:00:50",
+      "edge_tts": {
+        "voice": "en-US-GuyNeural",
+        "pitch_hz": 30,
+        "speed_percent": 5,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "off",
+        "robot_voice": "off",
+        "cheap_mic": "mild",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    },
+    "Landlord": {
+      "display_name": "Landlord",
+      "last_seen": "2026-03-05T22:00:50",
+      "edge_tts": {
+        "voice": "en-GB-ThomasNeural",
+        "pitch_hz": -40,
+        "speed_percent": -10,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "off",
+        "robot_voice": "off",
+        "cheap_mic": "mild",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    },
+    "Sarah O'Brien": {
+      "display_name": "Sarah O'Brien",
+      "last_seen": "2026-03-05T22:00:50",
+      "edge_tts": {
+        "voice": "en-US-JennyNeural",
+        "pitch_hz": 30,
+        "speed_percent": 5,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "off",
+        "robot_voice": "off",
+        "cheap_mic": "mild",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    },
+    "Alice": {
+      "display_name": "Alice",
+      "last_seen": "2026-03-02T00:26:29",
+      "edge_tts": {
+        "voice": "en-US-MichelleNeural",
+        "pitch_hz": 0,
+        "speed_percent": 0,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "off",
+        "robot_voice": "off",
+        "cheap_mic": "off",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    },
+    "Bob": {
+      "display_name": "Bob",
+      "last_seen": "2026-03-02T00:26:29",
+      "edge_tts": {
+        "voice": "en-US-ChristopherNeural",
+        "pitch_hz": 0,
+        "speed_percent": 0,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "off",
+        "robot_voice": "off",
+        "cheap_mic": "off",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    },
+    "Guide": {
+      "display_name": "Guide",
+      "last_seen": "2026-03-04T01:29:15",
+      "edge_tts": {
+        "voice": "en-KE-AsiliaNeural",
+        "pitch_hz": 0,
+        "speed_percent": 0,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "medium",
+        "robot_voice": "off",
+        "cheap_mic": "mild",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    },
+    "Commander": {
+      "display_name": "Commander",
+      "last_seen": "2026-03-05T19:32:38",
+      "edge_tts": {
+        "voice": "en-US-RogerNeural",
+        "pitch_hz": -13,
+        "speed_percent": 3,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "off",
+        "robot_voice": "off",
+        "cheap_mic": "mild",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    },
+    "Dr_Voss": {
+      "display_name": "Dr_Voss",
+      "last_seen": "2026-03-05T19:32:38",
+      "edge_tts": {
+        "voice": "en-US-MichelleNeural",
+        "pitch_hz": -3,
+        "speed_percent": 2,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "off",
+        "robot_voice": "off",
+        "cheap_mic": "mild",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    },
+    "ARIA": {
+      "display_name": "ARIA",
+      "last_seen": "2026-03-05T19:32:38",
+      "edge_tts": {
+        "voice": "en-US-AriaNeural",
+        "pitch_hz": 0,
+        "speed_percent": 0,
+        "yell_impact_percent": 0,
+        "volume_percent": 100
+      },
+      "audio_effects": {
+        "radio": "off",
+        "reverb": "off",
+        "distortion": "off",
+        "telephone": "mild",
+        "robot_voice": "medium",
+        "cheap_mic": "off",
+        "underwater": "off",
+        "megaphone": "off",
+        "worn_tape": "off",
+        "intercom": "off",
+        "alien": "off",
+        "cave": "off"
+      },
+      "flags": {
+        "fmsu": false,
+        "reverse": false
+      }
+    }
+  }
+}

@@ -1,0 +1,2 @@
+ttkbootstrap>=1.10.1
+edge-tts>=6.1.9
