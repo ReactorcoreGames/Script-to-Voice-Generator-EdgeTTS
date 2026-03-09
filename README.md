@@ -8,6 +8,8 @@ Welcome to any script writing author out there!
 You can convert formatted script files into fully voiced audio using Microsoft Edge-TTS,
 with per-character voice settings, audio effects, and smart merged output.
 
+Get it here: https://reactorcore.itch.io/script-to-voice-generator
+
 **Made by Reactorcore** — https://linktr.ee/reactorcore
 
 ---
