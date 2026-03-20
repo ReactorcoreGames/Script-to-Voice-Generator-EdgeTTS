@@ -38,6 +38,49 @@ def is_yell_line(spoken_text):
     return '!' in punct_part
 
 
+def _build_silence_filter(mode: str) -> str:
+    """
+    Build an FFMPEG silenceremove filter string for the given trim mode.
+
+    Modes:
+        off            — no filter (empty string)
+        beginning      — trim leading silence only
+        end            — trim trailing silence only (areverse sandwich)
+        beginning_end  — trim both (default)
+        all            — trim beginning, end, and mid-clip gaps
+    """
+    START = (
+        "silenceremove="
+        "start_periods=1:start_silence=0.02:start_threshold=-35dB:stop_periods=0"
+    )
+    # areverse sandwich: flip → trim start → flip back. Avoids stop_periods bug
+    # that prematurely cuts expressive voice tails on Edge-TTS output.
+    END = (
+        "areverse,"
+        "silenceremove="
+        "start_periods=1:start_silence=0.02:start_threshold=-35dB:stop_periods=0,"
+        "areverse"
+    )
+    MID = (
+        "silenceremove="
+        "start_periods=0:stop_periods=-1:stop_silence=0.1:stop_threshold=-80dB"
+    )
+
+    if mode == "off":
+        return ""
+    elif mode == "beginning":
+        return START
+    elif mode == "end":
+        return END
+    elif mode == "beginning_end":
+        return f"{START},{END}"
+    elif mode == "all":
+        return f"{START},{END},{MID}"
+    else:
+        # Unknown mode — fall back to beginning_end
+        return f"{START},{END}"
+
+
 class AudioGenerator:
     """Handles audio generation and conversion"""
 
@@ -148,7 +191,8 @@ class AudioGenerator:
 
     def apply_audio_effects(self, input_path, output_path, effect_settings,
                             volume_percent=100, is_inner_thought=False,
-                            config_manager=None, is_sfx=False):
+                            config_manager=None, is_sfx=False,
+                            silence_trim_mode="beginning_end"):
         """
         Apply audio effects and volume adjustment to an audio file using FFMPEG
 
@@ -184,20 +228,13 @@ class AudioGenerator:
             filters = []
 
             if not is_sfx:
-                # STAGE 0: Trim leading and trailing silence from Edge-TTS output
-                # Edge-TTS consistently pads clips with ~0.2s silence at the start
-                # and ~0.7s at the end. Removing this here fixes merged audio pacing
-                # and makes individual clips snappier.
-                # start_periods=1  — remove one block of silence at the start
-                # stop_periods=-1  — remove all trailing silence blocks
-                # stop_duration=0.1 — a gap must be >=0.1s long to be treated as trailing silence
-                #                     (prevents cutting off natural word gaps mid-sentence)
-                # -50dB threshold  — conservative enough to not affect quiet speech
-                filters.append(
-                    "silenceremove="
-                    "start_periods=1:start_silence=0:start_threshold=-50dB:"
-                    "stop_periods=-1:stop_silence=0.1:stop_threshold=-50dB"
-                )
+                # STAGE 0: Trim silence from Edge-TTS output.
+                # Mode is configurable via Tab 4 (default: beginning_end).
+                # Uses -35dB threshold with areverse sandwich for end trim
+                # to avoid the stop_periods bug that prematurely cuts expressive tails.
+                silence_filter = _build_silence_filter(silence_trim_mode)
+                if silence_filter:
+                    filters.append(silence_filter)
 
             # STAGE 2: Apply frequency-based effects first
             # These work best on normalized audio

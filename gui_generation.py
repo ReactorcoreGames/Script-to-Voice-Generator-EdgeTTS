@@ -104,6 +104,7 @@ class GenerationMixin:
                 sfx_paths[sfx_event.filename] = sfx_event.found_path
 
         use_project_subfolder = self._gen_use_project_subfolder_var.get()
+        silence_trim_mode = self.config_manager.get_silence_trim("mode") or "beginning_end"
 
         return {
             "project_name": project_name,
@@ -115,6 +116,7 @@ class GenerationMixin:
             "sfx_included": sfx_included,
             "sfx_paths": sfx_paths,
             "config_manager": self.config_manager,
+            "silence_trim_mode": silence_trim_mode,
         }
 
     def _generation_worker(self, settings):
@@ -155,6 +157,7 @@ class GenerationMixin:
         self._log_from_thread("-" * 50)
 
         config_manager = settings.get("config_manager")
+        silence_trim_mode = settings.get("silence_trim_mode", "beginning_end")
         audio_gen = AudioGenerator()
         clip_paths = {}  # line_number -> output path
         ref_entries = []  # (filename, speaker_id, spoken_text)
@@ -216,7 +219,8 @@ class GenerationMixin:
                 str(clean_path), str(effect_path),
                 sp['effects'], sp['volume'],
                 is_inner_thought=line.is_inner_thought,
-                config_manager=config_manager
+                config_manager=config_manager,
+                silence_trim_mode=silence_trim_mode,
             )
 
             if not success:
@@ -237,7 +241,7 @@ class GenerationMixin:
 
             # Merger uses the effects clip
             clip_paths[line.line_number] = str(effect_path)
-            ref_entries.append((clip_filename, speaker_id, line.spoken_text))
+            ref_entries.append((clip_filename, speaker_id, line.spoken_text, line.is_inner_thought))
 
             # Progress update
             pct = ((i + 1) / total_lines) * 70  # Clips = 0-70%
@@ -349,7 +353,17 @@ class GenerationMixin:
 
         ref_filename = f"{FileManager.sanitize_filename(project_name)}_reference.txt"
         ref_path = output_folder / ref_filename
-        FileManager.generate_reference_sheet(ref_entries, str(ref_path))
+        sound_count = len({e.filename for e in result.sound_effects})
+        FileManager.generate_reference_sheet(
+            ref_entries,
+            str(ref_path),
+            project_name=project_name,
+            output_format="mp3",
+            speaker_settings=speaker_settings,
+            config_manager=config_manager,
+            sfx_effects=settings.get("sfx_effects", {}),
+            sound_count=sound_count,
+        )
         self._log_from_thread(f"  Reference sheet: {ref_filename}", "success")
 
         # --- Done ---

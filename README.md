@@ -1,6 +1,3 @@
-
-![stvg_promo2](https://github.com/user-attachments/assets/076c6ffe-eb67-45cd-b60e-151be9421587)
-
 # Script to Voice Generator
 
 Welcome to any script writing author out there!
@@ -12,8 +9,6 @@ with per-character voice settings, audio effects, and smart merged output.
 
 ---
 
-<img width="1920" height="1020" alt="stvg screenshot (1)" src="https://github.com/user-attachments/assets/e84cb288-0bf0-41c7-8337-0d765860288f" />
-
 ## What You Need
 
 **FFMPEG** — Required for audio effects and merging.
@@ -21,7 +16,7 @@ with per-character voice settings, audio effects, and smart merged output.
 - Automatic installer (recommended): https://reactorcore.itch.io/ffmpeg-to-path-installer
 - Manual install: https://ffmpeg.org/download.html — add to system PATH after installing.
 
-**Python 3.x** — Required to run from source (not needed if using the compiled .exe).
+**Python 3.x** — Required to run from source (not needed if using the compiled .exe). You use to build_exe.bat to build the whole thing in a single click.
 
 ---
 
@@ -29,7 +24,7 @@ with per-character voice settings, audio effects, and smart merged output.
 
 Script to Voice Generator reads a formatted `.txt` or `.md` script file and:
 
-- Converts each dialogue line to speech using Edge-TTS (100+ voices).
+- Converts each dialogue line to speech using Edge-TTS (300+ voices).
 - Saves individual clips for each line — both clean (TTS only) and effects-processed.
 - Merges all clips into a single audio file, with smart pauses based on punctuation.
 - Produces both a raw merge and a loudness-normalized merge.

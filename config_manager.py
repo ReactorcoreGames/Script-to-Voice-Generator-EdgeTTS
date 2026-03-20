@@ -14,6 +14,7 @@ from config import (
     UI_DEFAULTS,
     INNER_THOUGHTS_PRESETS,
     INNER_THOUGHTS_DEFAULT_PRESET,
+    SILENCE_TRIM_DEFAULTS,
 )
 
 CURRENT_SCHEMA_VERSION = 1
@@ -49,6 +50,7 @@ def _build_defaults():
         "contextual_modifiers": dict(CONTEXTUAL_MODIFIER_DEFAULTS),
         "ui": dict(UI_DEFAULTS),
         "inner_thoughts": _build_inner_thoughts_defaults(),
+        "silence_trim": dict(SILENCE_TRIM_DEFAULTS),
     }
 
 
@@ -70,7 +72,7 @@ def _validate_and_fill(config):
     defaults = _build_defaults()
 
     # Ensure top-level keys exist
-    for section in ("merged_audio_pauses", "contextual_modifiers", "ui"):
+    for section in ("merged_audio_pauses", "contextual_modifiers", "ui", "silence_trim"):
         if section not in config or not isinstance(config[section], dict):
             config[section] = dict(defaults[section])
         else:
@@ -257,6 +259,25 @@ class ConfigManager:
     def reset_inner_thoughts_to_defaults(self):
         """Reset inner_thoughts section to defaults."""
         self.config["inner_thoughts"] = _build_inner_thoughts_defaults()
+        self.save()
+
+    # ── Silence trim ───────────────────────────────────────────
+
+    def get_silence_trim(self, key):
+        """Get a silence trim setting value."""
+        return self.config.get("silence_trim", {}).get(
+            key, SILENCE_TRIM_DEFAULTS.get(key)
+        )
+
+    def set_silence_trim(self, key, value):
+        """Set a silence trim setting and save."""
+        self.config.setdefault("silence_trim", dict(SILENCE_TRIM_DEFAULTS))
+        self.config["silence_trim"][key] = value
+        self.save()
+
+    def reset_silence_trim_to_defaults(self):
+        """Reset silence_trim section to defaults."""
+        self.config["silence_trim"] = dict(SILENCE_TRIM_DEFAULTS)
         self.save()
 
     def get_inner_thoughts_filter(self):

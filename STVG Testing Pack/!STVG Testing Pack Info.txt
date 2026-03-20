@@ -1,9 +1,0 @@
-# About
-
-This pack contains some tiny scripts to test out the capabilities of the Script To Voice Generator (STVG) program.
-
-It includes multiple speaker tests, sound effect tests, and different syntax tests.
-
-It provides the needed sound effect files too in various tests - including some loops and one-off sounds.
-
-You still need to pick the voices per each speaker atleast once, but they allow you to test out a various scenarios with various effects without having to commit to a larger script - most of the test scripts are only 4 lines long, they're generated fully in about 10 seconds.

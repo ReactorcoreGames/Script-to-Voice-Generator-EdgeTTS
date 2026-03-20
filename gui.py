@@ -58,16 +58,28 @@ class ScriptToVoiceGUI(Tab1Builder, Tab2Builder, Tab2StateMixin, Tab3Builder, Ta
         self.root.after(200, self._show_welcome_if_enabled)
 
     def _setup_icon(self):
-        """Setup application icon"""
+        """Setup application icon for title bar and taskbar."""
         try:
             if getattr(sys, 'frozen', False):
-                app_path = Path(sys.executable).parent
+                # Bundled exe: icon is embedded in the temp extraction folder
+                icon_path = Path(sys._MEIPASS) / ICON_FILENAME
+                if not icon_path.exists():
+                    # Fallback: next to the exe (for users who place it there)
+                    icon_path = Path(sys.executable).parent / ICON_FILENAME
             else:
-                app_path = Path(__file__).parent
+                icon_path = Path(__file__).parent / ICON_FILENAME
 
-            icon_path = app_path / ICON_FILENAME
             if icon_path.exists():
                 self.root.iconbitmap(str(icon_path))
+
+                # Set AppUserModelID so Windows taskbar shows the correct icon
+                try:
+                    import ctypes
+                    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
+                        "Reactorcore.ScriptToVoice.1"
+                    )
+                except Exception:
+                    pass
         except Exception as e:
             print(f"Could not load icon: {e}")
 

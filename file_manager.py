@@ -79,21 +79,34 @@ class FileManager:
         return test_dir
 
     @staticmethod
-    def generate_reference_sheet(entries, output_path):
+    def generate_reference_sheet(ref_entries, output_path, project_name="",
+                                  output_format="mp3", speaker_settings=None,
+                                  config_manager=None, sfx_effects=None,
+                                  sound_count=0):
         """
-        Generate a reference sheet .txt mapping filenames to spoken lines.
+        Generate a detailed project reference sheet.
 
         Args:
-            entries: list of (filename, speaker_id, spoken_text) tuples
-            output_path: Path for the .txt file
+            ref_entries:      list of (filename, speaker_id, spoken_text, is_inner_thought)
+            output_path:      Path for the .txt file
+            project_name:     User's project name
+            output_format:    Audio format string (always "mp3")
+            speaker_settings: Dict of speaker_id -> settings from generation
+            config_manager:   ConfigManager instance for pause/modifier values
+            sfx_effects:      Dict of SFX effect settings
+            sound_count:      Number of unique SFX files in the script
         """
-        lines = []
-        for filename, speaker_id, spoken_text in entries:
-            lines.append(f"[{filename}] - {speaker_id}: {spoken_text}")
-
-        with open(output_path, 'w', encoding='utf-8') as f:
-            f.write('\n'.join(lines))
-
+        from reference_writer import write_reference_sheet
+        write_reference_sheet(
+            output_path=output_path,
+            project_name=project_name,
+            output_format=output_format,
+            speaker_settings=speaker_settings or {},
+            ref_entries=ref_entries,
+            config_manager=config_manager,
+            sfx_effects=sfx_effects or {},
+            sound_count=sound_count,
+        )
         return output_path
 
     @staticmethod

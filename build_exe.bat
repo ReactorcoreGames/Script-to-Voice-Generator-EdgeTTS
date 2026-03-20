@@ -26,6 +26,7 @@ echo Building executable...
 pyinstaller --onefile --windowed ^
     --name "ScriptToVoiceGenerator" ^
     --icon=script_to_voice.ico ^
+    --add-data "script_to_voice.ico;." ^
     --hidden-import=config ^
     --hidden-import=config_manager ^
     --hidden-import=character_profiles ^

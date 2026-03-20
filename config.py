@@ -262,6 +262,11 @@ INNER_THOUGHTS_FILTER = (
     "volume=0.95"
 )
 
+# Silence trim settings
+SILENCE_TRIM_DEFAULTS = {
+    "mode": "beginning_end",  # off / beginning / end / beginning_end / all
+}
+
 # Characters invalid in filenames and JSON keys
 INVALID_FILENAME_CHARS = set('<>:"/\\|?*')
 # Characters allowed in speaker IDs: alphanumeric, spaces, hyphens, underscores

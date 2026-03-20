@@ -10,6 +10,7 @@ import subprocess
 import sys
 import tkinter as tk
 import ttkbootstrap as ttk
+from tkinter import ttk as _tk_ttk
 from pathlib import Path
 from ttkbootstrap.constants import *
 
@@ -19,6 +20,7 @@ from config import (
     INNER_THOUGHTS_PRESET_NAMES,
     INNER_THOUGHTS_DEFAULT_PRESET,
     INNER_THOUGHTS_PRESETS,
+    SILENCE_TRIM_DEFAULTS,
 )
 
 try:
@@ -93,6 +95,9 @@ class Tab4Builder:
         # --- Section 3: Inner Thoughts Effect ---
         self._build_inner_thoughts_section(scrollable)
 
+        # --- Section 4: Silence Trimming ---
+        self._build_silence_trim_section(scrollable)
+
         # Bind mousewheel to all child widgets
         bind_mousewheel_tab4(scrollable)
 
@@ -100,7 +105,7 @@ class Tab4Builder:
 
     def _build_quick_access_section(self, parent):
         """Build the Quick Access buttons rows."""
-        frame = ttk.LabelFrame(parent, text="Quick Access", padding=10)
+        frame = _tk_ttk.LabelFrame(parent, text="Quick Access", padding=10)
         frame.pack(fill=X, pady=(0, 10))
 
         ttk.Label(frame,
@@ -187,7 +192,7 @@ class Tab4Builder:
 
     def _build_pauses_section(self, parent):
         """Build sliders for all 8 punctuation pause values."""
-        frame = ttk.LabelFrame(parent, text="Merged Audio Pauses", padding=10)
+        frame = _tk_ttk.LabelFrame(parent, text="Merged Audio Pauses", padding=10)
         frame.pack(fill=X, pady=(0, 10))
 
         ttk.Label(frame,
@@ -274,7 +279,7 @@ class Tab4Builder:
 
     def _build_contextual_modifiers_section(self, parent):
         """Build controls for all contextual modifier values."""
-        frame = ttk.LabelFrame(parent, text="Contextual Modifiers", padding=10)
+        frame = _tk_ttk.LabelFrame(parent, text="Contextual Modifiers", padding=10)
         frame.pack(fill=X, pady=(0, 10))
 
         ttk.Label(frame,
@@ -409,7 +414,7 @@ class Tab4Builder:
 
     def _build_inner_thoughts_section(self, parent):
         """Build the inner thoughts effect preset picker and custom controls."""
-        frame = ttk.LabelFrame(parent, text="Inner Thoughts Effect", padding=10)
+        frame = _tk_ttk.LabelFrame(parent, text="Inner Thoughts Effect", padding=10)
         frame.pack(fill=X, pady=(0, 10))
 
         ttk.Label(frame,
@@ -450,7 +455,7 @@ class Tab4Builder:
         self._it_desc_label.pack(anchor=W, pady=(0, 8))
 
         # Custom parameters frame (shown only when "Custom" is selected)
-        self._it_custom_frame = ttk.LabelFrame(frame, text="Custom Parameters", padding=8)
+        self._it_custom_frame = _tk_ttk.LabelFrame(frame, text="Custom Parameters", padding=8)
         self._it_custom_frame.pack(fill=X, pady=(0, 8))
 
         self._build_it_custom_controls(self._it_custom_frame)
@@ -605,3 +610,48 @@ class Tab4Builder:
                     var._val_label.config(text=f"{float(val):.2f}{unit}")
 
         self._on_it_preset_changed()
+
+    # ── Section 4: Silence Trimming ───────────────────────────
+
+    def _build_silence_trim_section(self, parent):
+        """Build radio-button controls for silence trim mode."""
+        current_mode = self.config_manager.get_silence_trim("mode") or "beginning_end"
+        self._silence_trim_mode_var = tk.StringVar(value=current_mode)
+
+        frame = _tk_ttk.LabelFrame(parent, text="Silence Trimming", padding=(10, 6))
+        frame.pack(fill=X, pady=(0, 10))
+
+        ttk.Label(frame,
+                  text="Controls how silence is trimmed from the start/end of each generated "
+                       "voice clip before effects are applied. Removes Edge-TTS padding artifacts.",
+                  font=("Consolas", 10), foreground="#9AAF88",
+                  wraplength=880).pack(anchor=W, pady=(0, 8))
+
+        modes = [
+            ("beginning_end", "Trim beginning + end  (default — removes Edge-TTS padding from both sides)"),
+            ("beginning",     "Trim beginning only"),
+            ("end",           "Trim end only"),
+            ("all",           "Trim beginning, end, and mid-clip gaps  (warning: removes pauses inside a clip)"),
+            ("off",           "Off  (no trimming)"),
+        ]
+
+        for value, label in modes:
+            ttk.Radiobutton(frame, text=label,
+                            variable=self._silence_trim_mode_var, value=value,
+                            command=self._on_silence_trim_mode_changed,
+                            bootstyle="info").pack(anchor=W, pady=1)
+
+        ttk.Button(frame, text="Reset to Default",
+                   command=self._on_reset_silence_trim,
+                   bootstyle="warning-outline", width=20).pack(anchor=W, pady=(10, 0))
+
+    def _on_silence_trim_mode_changed(self):
+        """Save selected silence trim mode to config."""
+        mode = self._silence_trim_mode_var.get()
+        self.config_manager.set_silence_trim("mode", mode)
+
+    def _on_reset_silence_trim(self):
+        """Reset silence trim mode to default."""
+        default = SILENCE_TRIM_DEFAULTS["mode"]
+        self._silence_trim_mode_var.set(default)
+        self.config_manager.set_silence_trim("mode", default)
